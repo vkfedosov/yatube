@@ -48,7 +48,7 @@ class PostsViewsTests(TestCase):
         cls.uploaded = SimpleUploadedFile(
             name='test_image.gif',
             content=cls.create_image,
-            content_type='posts/images/',
+            content_type='posts/',
         )
         cls.post = Post.objects.create(
             text='Тестовый пост',

@@ -34,7 +34,7 @@ class PostFormTests(TestCase):
         cls.uploaded = SimpleUploadedFile(
             name='test_image.gif',
             content=cls.image,
-            content_type='posts/images/',
+            content_type='posts/',
         )
         cls.post_create_form_data = {
             'text': 'Тестовый пост',
@@ -117,4 +117,4 @@ class PostFormTests(TestCase):
         self.post_create(reverse('posts:post_create'),
                          self.create_post_with_image_form_data)
         post = Post.objects.first()
-        self.assertEqual(f'posts/images/{self.uploaded}', post.image)
+        self.assertEqual(f'posts/{self.uploaded}', post.image)
