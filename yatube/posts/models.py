@@ -33,7 +33,7 @@ class Post(models.Model):
     """Модель создание постов."""
     text = models.TextField(
         verbose_name='Текст поста',
-        help_text='Текст поста',
+        help_text='Введите текст поста',
     )
     pub_date = models.DateTimeField(
         auto_now_add=True,
@@ -54,11 +54,11 @@ class Post(models.Model):
         null=True,
         related_name='posts',
         verbose_name='Группа',
-        help_text='Группа, к которой относиться пост',
+        help_text='Выберете группу, к которой будет относиться пост',
     )
     image = models.ImageField(
         verbose_name='Картинка',
-        help_text='Картинка прикрепленная к посту',
+        help_text='Выберете картинку поста',
         upload_to='posts/',
         blank=True,
     )
@@ -69,7 +69,7 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
     def __str__(self):
-        return self.text
+        return self.text[:30]
 
 
 class Comment(models.Model):
@@ -103,7 +103,7 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
     def __str__(self):
-        return self.text
+        return self.text[:30]
 
 
 class Follow(models.Model):
