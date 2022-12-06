@@ -10,8 +10,15 @@
           Отмена подписки
         </div>
         <div class="card-body">
-          <p>Вы успешно отписались от автора: {{ author.get_full_name }}</p>
-          <a href="{% url 'posts:index' %}">на главную страницу</a>
+          <p>Вы успешно отписались от автора: {{ author.username }}</p>
+          <a class="btn btn-outline-dark btn-sm"
+             href="{% url 'posts:index' %}">
+            На главную
+          </a>
+          <a class="btn btn-outline-dark btn-sm me-md-1"
+             href="{% url 'posts:follow_index' %}">
+            На страницу подписок
+          </a>
         </div>
       </div>
     </div>

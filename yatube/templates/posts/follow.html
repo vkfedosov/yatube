@@ -4,9 +4,13 @@
 {% endblock %}
 {% block content %}
     {% include 'posts/includes/switcher.html' %}
-    {% for post in page_obj %}
-      {% include 'includes/post.html' with show_author=True %}
-    {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %}
-    {% include 'posts/includes/paginator.html' %}
+    {% if page_obj %}
+      {% for post in page_obj %}
+        {% include 'includes/post.html' with show_author=True unfollow=True %}
+        {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+    {% else %}
+      Вы не подписаны не на одного автора
+    {% endif %}
+  {% include 'posts/includes/paginator.html' %}
 {% endblock %}

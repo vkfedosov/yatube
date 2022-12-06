@@ -1,24 +1,36 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 User = get_user_model()
 
 
 class Group(models.Model):
     """Модель создание групп для постов."""
+    group_author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='group',
+        verbose_name='Автор группы',
+        blank=True,
+        null=True,
+    )
     title = models.CharField(
+        unique=True,
         max_length=200,
         verbose_name='Наименование группы',
-        help_text='Группа, к которой относится пост',
     )
     slug = models.SlugField(
         unique=True,
         verbose_name='Идентификатор группы',
-        help_text='Идентификатор группы, к которому относится пост',
+        help_text='Идентификатор группы, к которому относится пост. '
+                  'Идентификатор должен быть на английском языке в одно слово '
+                  'или, если слов несколько, в формате: snake_case',
     )
     description = models.TextField(
         verbose_name='Описание группы',
-        help_text='Описание группы, в которой будет пост',
+        help_text='Описание, которое будет отображаться на странице группы',
     )
 
     class Meta:
@@ -127,3 +139,35 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
+
+
+class Profile(models.Model):
+    """Модель настроек профиля."""
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='settings',
+        verbose_name='Пользователь',
+        help_text='Пользователь, который выбирает аватар'
+    )
+    avatar = models.ImageField(
+        verbose_name='Аватар',
+        default='default_avatar.png',
+        help_text='Выберете картинку для аватара',
+        upload_to='posts/avatar',
+        blank=False,
+        null=False,
+    )
+
+    class Meta:
+        verbose_name = 'Аватар'
+        verbose_name_plural = 'Аватар'
+
+    def __str__(self):
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)

@@ -1,30 +1,49 @@
 <article>
-  <ul>
+  <style>
+    .btn-xs {
+        padding: .30rem .2rem;
+        font-size: .750rem;
+        line-height: .6;
+        border-radius: .2rem;
+    }
+  </style>
     {% if show_author %}
-      <li>
-        Автор: {{ post.author.get_full_name }}
       <a href="{% url 'posts:profile' post.author.username %}">
-        все посты пользователя
+        {% for profile in settings %}
+          {% if profile.user == post.author %}
+            {% load thumbnail %}
+              {% thumbnail profile.avatar "32x32" upscale=True padding=True crop="center" as img %}
+                <img class="avatar" src="{{ img.url }}">
+              {% endthumbnail %}
+          {% endif %}
+        {% endfor %}
+        {{ post.author.username }}
       </a>
-      </li>
+      {% if unfollow %}
+        <a class="btn btn-outline-danger btn-xs"
+          href="{% url 'posts:profile_unfollow' post.author.username %}" role="button" >
+          отписаться
+        </a>
+      {% endif %}
     {% endif %}
-    <li>
-      Дата публикации: {{ post.pub_date|date:"d E Y" }}
-    </li>
-  </ul>
-  {% load thumbnail %}
-  {% thumbnail post.image "860x239" crop="center" upscale=True as im %}
-    <img class="card-img my-2" src="{{ im.url }}">
-  {% endthumbnail %}
-  <p>{{ post.text|truncatechars:160 }}</p>
-  <a href="{% url 'posts:post_detail' post.id %}">
-    подробная информация
-  </a>
-  <p>
-    {% if post.group %}
-    <a href="{% url 'posts:group_list' post.group.slug %}">
-      все записи группы
-    </a>
-    {% endif %}
-  </p>
+    <p style=font-size:14px;>
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        <br>
+        {% if post.group %}
+          Пост размещен в группе:
+          <a href="{% url 'posts:group_list' post.group.slug %}">
+            {{ post.group }}
+          </a>
+        {% endif %}
+    </p>
+    {{ post.text|truncatechars:160 }}
+    {% load thumbnail %}
+      {% thumbnail post.image "1080x720" upscale=True as im %}
+        <img class="card-img my-2" src="{{ im.url }}">
+      {% endthumbnail %}
+    <p style="padding: 6px 0 0;">
+      <a class="btn btn-outline-dark btn-sm" href="{% url 'posts:post_detail' post.id %}">
+        Открыть пост
+      </a>
+    </p>
 </article>

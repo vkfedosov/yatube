@@ -29,6 +29,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'testserver',
+    'www.vkfedosov.pythonanywhere.com',
+    'vkfedosov.pythonanywhere.com',
 ]
 
 # Application definition

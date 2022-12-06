@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Технологии{% endblock %}
+{% block title %}
+  Технологии
+{% endblock %}
 {% block content %}
 {% comment %} Колонки с отступом сверху и снизу {% endcomment %}
+{% load static %}
 <div class="row">
-  <h1>Вот что я умею</h1>
+  <h1>Стек технологий</h1>
   {% comment %}
     Боковой блок со списком технологий
     Займет всю ширину блока на мобильном
@@ -12,10 +15,46 @@
   <aside class="col-12 col-md-3">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        Python
+        <a href="https://www.python.org/">
+          <img src="{% static 'img/python.png' %}" width="20" height="20">
+          Python
+        </a>
       </li>
       <li class="list-group-item">
-        Django
+        <a href="https://www.djangoproject.com/">
+          <img src="{% static 'img/django.png' %}" width="20" height="20">
+          Django
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="https://github.com/">
+          <img src="{% static 'img/github.png' %}" width="20" height="20">
+          Github
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="https://www.sqlite.org">
+          <img src="{% static 'img/sqlite.png' %}" width="20" height="20">
+          SQLite
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="https://html.spec.whatwg.org/">
+          <img src="{% static 'img/html5.png' %}" width="20" height="20">
+          HTML
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="https://www.w3.org/Style/CSS/">
+          <img src="{% static 'img/css.png' %}" width="20" height="20">
+          CSS
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="https://getbootstrap.com/">
+          <img src="{% static 'img/bootstrap.png' %}" width="20" height="20">
+          Bootstrap
+        </a>
       </li>
     </ul>
   </aside>
@@ -25,7 +64,7 @@
     и 75% при размерах экрана ≥768px
   {% endcomment %}
   <article class="col-12 col-md-9">
-    <p>Текст страницы "Технологии"</p>
+    <p>Технологии, которые были использованы для проекта <span style="color:#dc3545">Ya</span>tube</p></p>
   </article>
 </div>
 {% endblock %}

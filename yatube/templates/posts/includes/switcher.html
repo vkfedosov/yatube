@@ -1,18 +1,20 @@
-{% if user.is_authenticated %}
-  <div class="row my-3">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link {% if index %}active{% endif %}"
-          href="{% url 'posts:index' %}">
-          Все авторы
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if follow %}active{% endif %}"
-           href="{% url 'posts:follow_index' %}">
-          Подписки
-        </a>
-      </li>
-    </ul>
-  </div>
-{% endif %}
+{% with request.resolver_match.view_name as view_name %}
+  {% if user.is_authenticated %}
+    <div class="row my-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'posts:index' %}active{% endif %}"
+             href="{% url 'posts:index' %}">
+            <i class="text-dark">Все авторы</i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'posts:follow_index' %}active{% endif %}"
+             href="{% url 'posts:follow_index' %}">
+            <i class="text-dark">Подписки</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  {% endif %}
+{% endwith %}

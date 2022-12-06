@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+  Настройки аватара
+{% endblock %}
+{% block content %}
+  <style>
+    .user-info {
+      text-align: center;
+    }
+  </style>
+  <div class="container light-style flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-4">
+      Настройки аватара
+    </h4>
+    {% load user_filters %}
+    <div class="row">
+      <div class="col-sm">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <p style="text-align:center;">
+              <img class="avatar" src="{{ settings.avatar.url }}" width="128" height="128">
+            </div>
+            <p>
+              <h5 class="user-info">{{ settings.user.get_full_name }}</h5>
+              <h6 class="user-info">{{ settings.user.email }}</h6>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-10">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <label for="avatar">
+            Изменить аватар
+          </label>
+          <input type="file" name="avatar" accept="image/*" class="form-control" id="avatar" required>
+          <div class="btn-block" style = "position:relative; top:15px;">
+            <button type="submit" class="btn btn-outline-dark">Сохранить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% if request.FILES is empty %} disabled{% endif %}

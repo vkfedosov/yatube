@@ -1,10 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Об авторе проекта{% endblock %}
+{% block title %}
+  Об авторе проекта
+{% endblock %}
+{% load static %}
 {% block content %}
-<h1>Привет, я автор</h1>
+<h1>Привет, я автор проекта <span style="color:#dc3545">Ya</span>tube - Федосов Виталий</h1>
+<p>Проект был разработан в рамках блока "Бэкенд на Django" курса
+  <a href="https://practicum.yandex.ru/backend-developer/">
+    Python-разработчик
+  </a>
+  Яндекс.Практикума
+</p>
+<p>Контакты для связи с автором проекта:</p>
 <p>
-  Тут я размещу информацию о себе, используя свои умения верстать.
-  Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста.
-  <p>Время поджимает, поэтому видимо не сейчас &#128517;</p>
+  <a href="https://github.com/vkfedosov">
+      <img src="{% static 'img/github.png' %}" width="20" height="20">
+      Github
+  </a>
+</p>
+<p>
+  <a href="https://t.me/vkfedosov/">
+      <img src="{% static 'img/telegram.png' %}" width="20" height="20">
+      Telegram: @vkfedosov
+  </a>
+</p>
+<p>
+  <a href="mailto:fedosov.vitaly@gmail.com">
+      <img src="{% static 'img/gmail.png' %}" width="20" height="20">
+      Gmail: fedosov.vitaly@gmail.com
+  </a>
 </p>
 {% endblock %}
