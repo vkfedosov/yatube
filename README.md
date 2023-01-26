@@ -51,11 +51,11 @@ Yatube - социальная сеть, даёт пользователям во
 * Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone git@github.com:vkfedosov/yatube_social_network.git
+git clone git@github.com:vkfedosov/yatube.git
 ```
 
 ```
-cd yatube_social_network
+cd yatube
 ```
 
 * Cоздать и активировать виртуальное окружение:
